@@ -1,0 +1,28 @@
+{
+  "name": "immotool-xml2redis",
+  "version": "1.0.0",
+  "description": "Save an uploaded ZIP File from OpenImmoTool with ImmotoolXML file format to redis",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "8.2.0",
+    "ejs": "3.0.1",
+    "etl": "0.6.12",
+    "express": "4.17.1",
+    "express-fileupload": "1.1.6",
+    "fast-xml-parser": "3.16.0",
+    "file-type": "12.4.2",
+    "glob": "7.1.6",
+    "he": "1.2.0",
+    "ioredis": "4.16.3",
+    "rxjs": "6.5.4",
+    "stream-to-array": "2.3.0",
+    "streamifier": "0.1.1",
+    "unzipper": "0.10.10"
+  }
+}
