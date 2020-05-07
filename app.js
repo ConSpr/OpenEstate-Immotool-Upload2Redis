@@ -25,12 +25,17 @@ const { createReadStream } = require("streamifier");
 const etl = require("etl");
 const fileType = require("file-type");
 const convertJSON = require('./jsonBuilder.js');
-
-const { promisify } = require("util");
-const {performance } = require('perf_hooks');
 const Redis = require("ioredis");
-const redis = new Redis();
+
 require('dotenv/config');
+/* 
+
+Required env variables:
+ 	PORT 			- Specifies port express routes listen to
+	LOGINPASSWORD 	- Specifies required password for uploads
+	LOGINNAME		- Specifies required username for uploads
+
+*/ 
 
 
 app.use(fileUpload());
@@ -81,6 +86,8 @@ app.post('/', (req, res) => {
 	}
 });
 
+//Connect to redis instance
+const redis = new Redis();
 //Check database connection
 redis.on("error", (error) =>{
 	console.error(error);
@@ -220,6 +227,7 @@ async function writeObjectsToDatabase(realEstates, author) {
 	//Add author to authors set
 	await redis.sadd("authors", author);
 	//Rewrite AOF file
+	
 	redis.bgrewriteaof()
 		.then(console.log("Rewrite finished"));
 }
