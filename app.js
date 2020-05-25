@@ -83,6 +83,8 @@ app.post('/', (req, res) => {
 		.then(() => res.sendStatus(200))
 		.catch(err => { console.log('Something broke: ', err); res.sendStatus(500) })
 		.finally(()=> console.log('Finished'))	
+	}else{
+		res.sendStatus(403);
 	}
 });
 
@@ -227,7 +229,6 @@ async function writeObjectsToDatabase(realEstates, author) {
 	//Add author to authors set
 	await redis.sadd("authors", author);
 	//Rewrite AOF file
-	
-	redis.bgrewriteaof()
-		.then(console.log("Rewrite finished"));
+	redis.bgrewriteaof().catch(err => console.error("Another rewrite is in progess"))
+
 }
