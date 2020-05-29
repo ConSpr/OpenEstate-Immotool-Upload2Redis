@@ -45,7 +45,7 @@ app.get("/:id?", (req,res)=>{
 		redis.get(req.params.id)
 		.then((result) => {
 			res.status(200).send(JSON.parse(result));
-		});
+		}).catch((err) =>{ res.status(404).send("Diese Immobilie exsistiert nicht!");});
 	}else{
 		redis.smembers("authors")
 		.then((result) => {return redis.sunion(result); })

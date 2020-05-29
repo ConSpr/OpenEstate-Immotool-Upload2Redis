@@ -1,3 +1,4 @@
 node_modules
 /redis-data
 .env
+.DS_Store
